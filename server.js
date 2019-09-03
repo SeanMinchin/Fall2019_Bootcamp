@@ -9,10 +9,10 @@ var listingData, server;
 var requestHandler = function(request, response) {
   var parsedUrl = url.parse(request.url);
 
-  if(parsedUrl.pathname == '/listings') {
+  if(request.method == 'GET' && parsedUrl.pathname == '/listings') {
   	// send ok message to request
   	 response.writeHead(200, {
-  		'Content-Type': 'text/plain'});
+  		'Content-Type': 'application/json'});
   	response.end(listingData);
   } else {
   	// send error message to request
@@ -34,6 +34,6 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
 
 	// start server
 	server.listen(port, function() {
-		console.log('server listening on: http://localhost:8080');
+		console.log('server listening on: http://localhost:' + port);
 	});
 });
