@@ -16,9 +16,7 @@ var findLibraryWest = function() {
     then log it to the console. 
    */
   Listing.findOne({ name: 'Library West' }, function(err, listing) {
-    if(err) {
-      throw err;
-    }
+    if(err) throw err;
     console.log(listing);
   });
 };
@@ -30,9 +28,7 @@ var removeCable = function() {
     and remove this listing from your database and log the document to the console. 
    */
   Listing.findOneAndDelete({ code : 'CABL' }, function(err, listing) {
-    if(err) {
-      throw err;
-    }
+    if(err) throw err;
     console.log(listing);
   });
 };
@@ -40,13 +36,13 @@ var removeCable = function() {
 var updatePhelpsLab = function() {
   /*
     Phelps Lab address is incorrect. Find the listing, update it, and then 
-    log the updated document to the console. 
+    log the updated document to the console.
+    Correct Address: 1953 Museum Rd, Gainesville, FL 32603
    */
-  var newAddress = '1953 Musuem Road, Gainesville, FL 32611, United States';
-  Listing.findOneAndUpdate({ name : 'Phelps Laboratory' }, { address : newAddress }, function(err, listing) {
-    if(err) {
-      throw err;
-    }
+  var updatedAddress = { address : '1953 Museum Rd, Gainesville, FL 32603, United States' };
+  Listing.findOneAndUpdate({ name : 'Phelps Laboratory' }, updatedAddress, { new : true },
+  function(err, listing) {
+    if(err) throw err;
     console.log(listing);
   });
 };
@@ -55,8 +51,9 @@ var retrieveAllListings = function() {
   /* 
     Retrieve all listings in the database, and log them to the console. 
    */
-  Listing.find({}, function(err, listing) {
-    console.log(listing);
+  Listing.find({}, function(err, listings) {
+    if(err) throw err;
+    console.log(listings);
   });
 };
 

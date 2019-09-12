@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
      See also https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
   */
 var listingSchema = new Schema({
-  /* Your code for a schema here */ 
   //Check out - https://mongoosejs.com/docs/guide.html
   code: { type: String, required: true },
   name: { type: String, required: true },
@@ -22,7 +21,6 @@ var listingSchema = new Schema({
    See https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
 */
 listingSchema.pre('save', function(next) {
-  /* your code here */
   var currentDate = new Date();
   this.updated_at = currentDate;
 

@@ -19,20 +19,16 @@ mongoose.connect(config.db.uri, { useNewUrlParser: true });
   Instantiate a mongoose model for each listing object in the JSON file, 
   and then save it to your Mongo database 
   //see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-
   Remember that we needed to read in a file like we did in Bootcamp Assignment #1.
  */
 
 fs.readFile('listings.json', function(err, data) {
-  if(err) {
-    throw err;
-  }
+  if(err) throw err;
 
-  // delete the current listings in the database
+  // delete the current listings in the database,
+  // so script can be run multiple times easily for testing purposes
   Listing.deleteMany({}, function(err) {
-    if(err) {
-      throw err;
-    }
+    if(err) throw err;
   });
 
   var entries = JSON.parse(data.toString()).entries;
@@ -45,9 +41,7 @@ fs.readFile('listings.json', function(err, data) {
     });
 
     listing.save(function(err) {
-      if(err) {
-        throw err;
-      }
+      if(err) throw err;
     });
   });
 });
